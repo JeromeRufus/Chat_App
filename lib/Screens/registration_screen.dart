@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  static String routename = 'registration_screen';
   const RegistrationScreen({super.key});
 
   @override

@@ -3,6 +3,7 @@ import 'package:chat_app/Screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  static String routename = 'welcome_screen';
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -33,6 +34,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               Row(
                 children: [
                   //cricle avatar
+                  Container(
+                    child: Image.asset('assets/images/kill.png'),
+                    height: 60.0,
+                  ),
                   Text(
                     'Flash Chat',
                     style: TextStyle(
@@ -54,11 +59,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   color: Color(0xFFA8DADC),
                   borderRadius: BorderRadius.circular(30.0),
                   child: MaterialButton(
-                    onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ),
-                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, LoginScreen.routename);
+                    },
                     minWidth: 200.0,
                     height: 42.0,
                     child: Text(
@@ -76,11 +79,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   color: Color(0xFFA8DADC),
                   borderRadius: BorderRadius.circular(30.0),
                   child: MaterialButton(
-                    onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => RegistrationScreen(),
-                      ),
-                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(
+                          context, RegistrationScreen.routename);
+                    },
                     minWidth: 200.0,
                     height: 42.0,
                     child: Text(
