@@ -8,11 +8,48 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  AnimationController get controller => _controller;
+  late Animation animation;
+  void inistate() {
+    super.initState();
+    _controller = AnimationController(
+      duration: Duration(seconds: 3),
+      vsync: this,
+    );
+    //animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
+    animation =
+        ColorTween(begin: Colors.red, end: Colors.blue).animate(_controller);
+    //_controller.forward();
+    _controller.reverse(from: 1.0);
+
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        controller.reverse(from: 1.0);
+      } else if (status == AnimationStatus.dismissed) {
+        controller.forward();
+      }
+    });
+    _controller.addListener(() {
+      setState(() {
+        print(animation.value);
+      });
+    });
+  }
+
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    //Get.lazyPutt(() => DataClass());
     return Scaffold(
       //backgroundColor: Color(0xFF9F9F92),
+      //backgroundColor: animation.value,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -34,11 +71,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               Row(
                 children: [
                   //cricle avatar
-                  Container(
-                    child: Image.asset('assets/images/kill.png'),
-                    height: 60.0,
+                  Hero(
+                    tag: 'logo',
+                    child: Container(
+                      child: Image.asset('assets/images/kill.png'),
+                      height: 60.0,
+                      //heiht:animation.value*100,
+                    ),
                   ),
                   Text(
+                    //'${_controller.value.toInt()}%',
                     'Flash Chat',
                     style: TextStyle(
                       fontSize: 45.0,
