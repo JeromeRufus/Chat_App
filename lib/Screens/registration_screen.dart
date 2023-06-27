@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:chat_app/components/roundedbutton.dart';
+import 'package:chat_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -11,6 +15,8 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  String? email;
+  String? password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,86 +40,40 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
-              onChanged: (Value) {},
-              decoration: InputDecoration(
-                hintText: 'enter the email',
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 20.0,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
-                ),
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.emailAddress,
+              onChanged: (Value) {
+                email = Value;
+              },
+              decoration: kTextFieldDecoration.copyWith(
+                hintText: 'Enter your email',
               ),
             ),
             SizedBox(
               height: 8.0,
             ),
             TextField(
-              onChanged: (value) {},
-              decoration: InputDecoration(
-                hintText: 'enter the password',
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 20.0,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
-                ),
+              obscureText: true,
+              textAlign: TextAlign.center,
+              onChanged: (value) {
+                password = value;
+              },
+              decoration: kTextFieldDecoration.copyWith(
+                hintText: 'Enter your password',
               ),
             ),
             SizedBox(
               height: 24.0,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 16.0,
-              ),
-              child: Material(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(30.0),
-                ),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {},
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Register',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            )
+            //
+            RoundedButton(
+              color: Color(0xFFD5CAD6),
+              title: 'Register',
+              onPressed: () {
+                print(email);
+                debugPrint(password);
+              },
+            ),
           ],
         ),
       ),
