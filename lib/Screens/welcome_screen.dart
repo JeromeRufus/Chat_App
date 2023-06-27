@@ -1,6 +1,9 @@
 import 'package:chat_app/Screens/login_screen.dart';
 import 'package:chat_app/Screens/registration_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+
+import '../components/roundedbutton.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static String routename = 'welcome_screen';
@@ -10,8 +13,8 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  AnimationController get controller => _controller;
+  AnimationController? _controller;
+  AnimationController? get controller => _controller;
   late Animation animation;
   void inistate() {
     super.initState();
@@ -20,27 +23,27 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       vsync: this,
     );
     //animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
-    animation =
-        ColorTween(begin: Colors.red, end: Colors.blue).animate(_controller);
+    animation = ColorTween(begin: Colors.red, end: Colors.blue)
+        .animate(_controller as Animation<double>);
     //_controller.forward();
-    _controller.reverse(from: 1.0);
+    _controller!.reverse(from: 1.0);
 
     animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        controller.reverse(from: 1.0);
+        controller!.reverse(from: 1.0);
       } else if (status == AnimationStatus.dismissed) {
-        controller.forward();
+        controller!.forward();
       }
     });
-    _controller.addListener(() {
+    _controller!.addListener(() {
       setState(() {
-        print(animation.value);
+        //print(animation.value);
       });
     });
   }
 
   void dispose() {
-    controller.dispose();
+    controller!.dispose();
     super.dispose();
   }
 
@@ -79,19 +82,30 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       //heiht:animation.value*100,
                     ),
                   ),
-                  Text(
+                  TypewriterAnimatedTextKit(
                     //'${_controller.value.toInt()}%',
-                    'Flash Chat',
-                    style: TextStyle(
+
+                    text: ['Flash Chat'],
+                    textStyle: TextStyle(
                       fontSize: 45.0,
                       fontWeight: FontWeight.w900,
                     ),
+
+                    //),
                   ),
                 ],
               ),
               SizedBox(
                 height: 48.0,
               ),
+              // RoundedButton(
+              //   color: Color(0xFFA8DADC),
+              //   title: 'Log In',
+              //   onPressed: () {
+              //     Navigator.of(context).pushReplacement(
+              //         MaterialPageRoute(builder: (_) => LoginScreen()));
+              //   },
+              // ),
               Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: 16.0,
@@ -107,11 +121,20 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     minWidth: 200.0,
                     height: 42.0,
                     child: Text(
-                      'Log In',
+                      'Login',
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
               ),
+              // RoundedButton(
+              //   color: Color(0xFFA8DADC),
+              //   title: 'Register',
+              //   onPressed: () {
+              //     Navigator.of(context).pushReplacement(MaterialPageRoute(
+              //         builder: (context) => (RegistrationScreen())));
+              //   },
+              // ),
               Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: 16.0,
@@ -129,6 +152,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     height: 42.0,
                     child: Text(
                       'Register',
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ),

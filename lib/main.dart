@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       //title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.black54),
-        ),
-      ),
+      // theme: ThemeData.dark().copyWith(
+      //   textTheme: TextTheme(
+      //     bodyText1: TextStyle(color: Colors.black54),
+      //   ),
+      // ),
       initialRoute: WelcomeScreen.routename,
       routes: {
         WelcomeScreen.routename: (context) => WelcomeScreen(),
