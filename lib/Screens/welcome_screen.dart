@@ -74,6 +74,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               Row(
                 children: [
                   //cricle avatar
+
                   Hero(
                     tag: 'logo',
                     child: Container(
@@ -82,10 +83,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       //heiht:animation.value*100,
                     ),
                   ),
+                  SizedBox(
+                    width: 15.0,
+                  ),
                   TypewriterAnimatedTextKit(
                     //'${_controller.value.toInt()}%',
-
-                    text: ['Flash Chat'],
+                    text: ['We Chat'],
                     textStyle: TextStyle(
                       fontSize: 45.0,
                       fontWeight: FontWeight.w900,

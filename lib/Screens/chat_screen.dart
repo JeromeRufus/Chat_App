@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:chat_app/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,6 +15,25 @@ class Chat_Screen extends StatefulWidget {
 }
 
 class _Chat_ScreenState extends State<Chat_Screen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  void iniState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try {
+      final User? user = await _auth.currentUser;
+      final uid = user?.uid;
+      if (user != null) {
+        print(user.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +41,10 @@ class _Chat_ScreenState extends State<Chat_Screen> {
         leading: null,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              _auth.signOut();
+              Navigator.pop(context);
+            },
             icon: Icon(Icons.close),
           )
         ],
